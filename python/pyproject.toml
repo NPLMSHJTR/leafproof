@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "leafproof"
+version = "0.1.0"
+description = "Append-only Merkle log whose inclusion proofs are verified by an independent implementation."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "leafproof contributors" }]
+keywords = ["merkle-tree", "inclusion-proof", "transparency-log", "rfc6962", "integrity"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: TypeScript",
+  "Topic :: Security :: Cryptography",
+]
+dependencies = []
+
+[project.scripts]
+leafproof = "leafproof.cli:main"
+
+[project.optional-dependencies]
+dev = ["ruff>=0.6", "mypy>=1.10"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/leafproof"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
